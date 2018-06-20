@@ -101,32 +101,28 @@ d4 project need to have the following directory architecture;
     `-- config_N.yaml
 ```
 
-* Dockerfile
-
+* Dockerfile  
 The Dockerfile which belongs to the project. For this Dockerfile, container image will be built and test will be executed. 
 
-* build.yaml
-
+* build.yaml  
 The yaml file which has arguments to be used by building image. All arguments of the Dockerfile should be described in this file. for example;
 
-```
-args:
-  ARG_1: "VALUE_1"
-  ARG_2: "VALUE_2"
-  ARG_3: "VALUE_3"
-```
+    ```
+    args:
+      ARG_1: "VALUE_1"
+      ARG_2: "VALUE_2"
+      ARG_3: "VALUE_3"
+    ```
 
-* common.yaml
-
+* common.yaml  
 The yaml file which has parameters to be used by both building image and testing image. for example;
 
-```
-image_name: bbrfkr0129/httpd:latest
-registry_server: docker.io
-```
+    ```
+    image_name: bbrfkr0129/httpd:latest
+    registry_server: docker.io
+    ```
 
-* tests/\<yaml config file\>
-
+* tests/\<yaml config file\>  
 The yaml files which has tests to be used by testing image. These tests in the yaml files need to be written as container-structure-test can be processed.
 
 ### TDD method with D4
@@ -202,31 +198,24 @@ The yaml files which has tests to be used by testing image. These tests in the y
     ```
 
 ### valid subcommands
-* d4 init
-
+* d4 init  
 Create and initialize project.
 
-* d4 build
-
+* d4 build  
 Only build process runs.
 
-* d4 test
-
+* d4 test  
 Only test process runs.
 
-* d4 login
-
+* d4 login  
 Only login into registry server specified in `common.yaml`.
 
-* d4 push
-
+* d4 push  
 Only push container image specified in `common.yaml`.
 
-* d4 develop
-
+* d4 develop  
 build and test processes run.
 
-* d4 release
-
+* d4 release  
 build, test, login and push processes run.
 

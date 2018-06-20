@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="d4",
-    version="0.1.6",
+    version="0.1.10",
     author="Tatsunori Saito",
     author_email="bbrfkr@gmail.com",
     description="Dock to Develop Dynamic Dockerfile",
@@ -19,7 +19,9 @@ setuptools.setup(
     ],
     package_data={
         "d4": [
-            "data/*",
+            "data/Dockerfile",
+            "data/common.yaml",
+            "data/build.yaml",
             "data/tests/*"
         ],
     },

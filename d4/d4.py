@@ -6,7 +6,7 @@ import yaml
 import os
 import subprocess
 
-VERSION = "0.1.6"
+VERSION = "0.1.10"
 PKG_PATH = (d4.__path__)[0]
 
 def get_version():
@@ -192,9 +192,14 @@ def main():
             return rc
         elif args.func == "develop":
             rc_build = build()
+            if rc_build != 0:
+                print("ERROR: build stage is failed")
+                return(rc_build)
             rc_test = test()
-            rc = 0 if (rc_build + rc_test) == 0 else 1
-            return rc
+            if rc_test != 0:
+                print("ERROR: test stage is failed")
+                return(rc_test)
+            return 0
         elif args.func == "login":
             rc = login(args.user,args.password)
             return rc
@@ -207,13 +212,24 @@ def main():
                 return 1
             else:
                 rc_build = build()
+                if rc_build != 0:
+                    print("ERROR: build stage is failed")
+                    return(rc_build)
                 rc_test = test()
+                if rc_test != 0:
+                    print("ERROR: test stage is failed")
+                    return(rc_test)
                 rc_login = 0
                 if (args.user is not None) and (args.password is not None):
                     rc_login = login(args.user, args.password)
+                if rc_login != 0:
+                    print("ERROR: login stage is failed")
+                    return(rc_login)
                 rc_push = push()
-                rc = 0 if (rc_build + rc_test + rc_login + rc_push) == 0 else 1
-                return rc
+                if rc_push != 0:
+                    print("ERROR: push stage is failed")
+                    return(rc_push)
+                return 0
     else:
       parser.print_help()
 
